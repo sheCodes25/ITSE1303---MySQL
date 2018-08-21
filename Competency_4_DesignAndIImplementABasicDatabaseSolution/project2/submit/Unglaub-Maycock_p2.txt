@@ -1,0 +1,42 @@
+use people;
+
+show tables;
+Tables_in_people
+
+country
+
+people
+
+registration
+
+
+
+describe country;
+Field		Type			Null	Key	Default	Extra
+
+idCountry	smallint(5) unsigned	NO	PRI	NULL	auto_increment
+
+CountryCode	varchar(3)		NO		NULL	
+
+Country		varchar(45)		NO		NULL	
+
+
+describe people;
+Field		Type			Null	Key	Default		Extra
+
+idPeople	int(10) unsigned	NO	PRI	NULL		auto_increment
+
+name		varchar(45)		NO	MUL	NULL		
+
+email		varchar(45)		NO		NULL	
+
+describe registration;
+Field		Type			Null	Key	Default	Extra
+
+idRegistration	smallint(5) unsigned	NO	PRI	NULL	auto_increment
+
+idCountry	varchar(45)		NO	PRI	NULL	
+
+idPeople	int(11)			NO		NULL	
+
+RegDate_Time	datetime		NO		NULL	

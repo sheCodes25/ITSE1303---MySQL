@@ -1,0 +1,42 @@
+Email,   Full Name,  Country,   Date   Registered
+
+Carley_Bahringer@destiny.com,Carley Bahringer,Papua New Guinea,1987-10-03 22:09:54 
+PNG
+
+Patricia_Fadel@avis.com,Patricia Fadel,Saint Lucia,2012-05-10 11:07:49 
+LCA
+
+Sedrick@godfrey.ca,Sedrick Kuphal,Chile,2007-11-12 00:09:53 
+CHL
+
+Briana_Berge@axel.ca,Briana Berge,Nicaragua,2006-03-26 15:32:08 
+NIC
+
+Lucy_Lockman@abby.org,Lucy Lockman,Iceland,2014-02-13 10:26:57 
+ISL
+
+Lucy_Lockman@abby.org,Lucy Lockman,Germany,1999-02-12 00:14:54 
+DEU
+
+Ayden_Flatley@colin.biz,Ayden Flatley,France,1987-01-23 21:43:22 
+FRA
+
+Alec.Boyle@aurore.co.uk,Alec Boyle,Brazil,2007-08-23 13:42:41 
+BRA
+
+Ozella_Feil@prudence.ca,Ozella Feil,Lesotho,2005-12-30 18:24:59 
+LSO
+
+Ozella_Feil@prudence.ca,Ozella Feil,Sweden,2009-06-19 10:32:55 ;
+SWE
+
+Insert into country COUNTRY
+
+
+
+
+
+
+
+
+CREATE TABLE `countries` (  `country_id` int(11) NOT NULL AUTO_INCREMENT,  `code` char(2) NOT NULL COMMENT 'Two-letter country code (ISO 3166-1 alpha-2)',  `name` varchar(64) NOT NULL COMMENT 'English country name',  `full_name` varchar(128) NOT NULL COMMENT 'Full English country name',  `iso3` char(3) NOT NULL COMMENT 'Three-letter country code (ISO 3166-1 alpha-3)',  `number` smallint(3) unsigned zerofill NOT NULL COMMENT 'Three-digit country number (ISO 3166-1 numeric)',  `continent_code` char(2) NOT NULL,  `display_order` int(3) NOT NULL DEFAULT '900',  PRIMARY KEY (`country_id`),  UNIQUE KEY `idx_code` (`code`) USING BTREE,  KEY `idx_continent_code` (`continent_code`) USING BTREE,  CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`continent_code`) REFERENCES `continents` (`code`) ON UPDATE CASCADE) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;

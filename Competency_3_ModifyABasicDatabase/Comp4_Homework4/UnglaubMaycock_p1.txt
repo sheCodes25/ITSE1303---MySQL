@@ -1,0 +1,131 @@
+Requirements
+1. Import the following database file city.sql
+
+2. If prompted for character set encoding type, select latin1
+
+3. Add to the database the following table and data:
+	a. Add a EDUCATION table with the following columns; country code as a primary key, literacy rate, male literacy rate, female literacy 	   	rate
+
+	CREATE TABLE EDUCATION
+	(
+	CountryCode char(3) PRIMARY KEY, 
+	LiteracyRate INT,
+	Male_LiteracyRate INT,
+	Female_LiteracyRate INT
+	);
+
+
+DESC EDUCATION;
+Field		    Type	Null	Key	Default	Extra
+CountryCode	    char(3)	NO	PRI	NULL	
+LiteracyRate	    int(11)	YES		NULL	
+Male_LiteracyRate   int(11)	YES		NULL	
+Female_LiteracyRate int(11)	YES		NULL	
+
+
+
+
+	b. Add data for the following countries
+
+		AFG, 38, 52, 24
+
+		DEU, 99, 99, 99
+
+		NLD, 99, 99, 99
+
+		USA, 99, 99, 99
+
+		
+		INSERT INTO EDUCATION
+ 		(CountryCode, LiteracyRate, Male_LiteracyRate, Female_LiteracyRate)
+		value('AFG',38,52,24);
+
+		INSERT INTO EDUCATION
+ 		(CountryCode, LiteracyRate, Male_LiteracyRate, Female_LiteracyRate)
+		value('DEU',99,99,99);
+
+		INSERT INTO EDUCATION
+ 		(CountryCode, LiteracyRate, Male_LiteracyRate, Female_LiteracyRate)
+		value('NLD',99,99,99);
+
+		INSERT INTO EDUCATION
+ 		(CountryCode, LiteracyRate, Male_LiteracyRate, Female_LiteracyRate)
+		value('USA',99,99,99);
+
+
+SELECT * FROM EDUCATION;
+CountryCode	LiteracyRate	 Male_LiteracyRate	Female_LiteracyRate
+	AFG		  38			52			 24
+	DEU		  99			99			 99
+	NLD		  99			99			 99
+	USA	   	  99			99			 99
+
+
+
+4. Execute the following commands and save the results.
+
+	a. Display the languages of the United States
+
+	SELECT LANGUAGE FROM CountryLanguage
+
+	WHERE CountryCode = 'USA';
+
+	LANGUAGE
+	English
+	French
+	German
+	Italian
+	Japanese
+	Korean
+	Polish
+	Portuguese
+	Spanish
+	Tagalog
+	Vietnamese
+
+
+
+	b. Display the cities of Germany and the population of each city
+
+	SELECT POPULATION,NAME
+
+	FROM CITY
+	
+	WHERE CountryCode = 'DEU';
+
+	POPULATION	name
+	3386667		Berlin
+	1704735		Hamburg
+	643821		Frankfurt am Main
+	599515		Essen
+	590213		Dortmund
+	582443		Stuttgart
+	
+
+	
+	c. Display the female literacy rate of all countries
+
+	SELECT Female_LiteracyRate FROM EDUCATION;
+	Female_LiteracyRate
+	24
+	99
+	99
+	99
+
+
+or
+	SELECT Female_LiteracyRate,CountryCode FROM EDUCATION;
+	Female_LiteracyRate	CountryCode
+	24			AFG
+	99			DEU
+	99			NLD
+	99			USA
+
+
+
+5. Submit the saved results file using the below name or paste as a text submission.
+	a. Include the results of the queries and the queries themselves.
+
+
+
+ 

@@ -1,0 +1,115 @@
+
+
+use Tennis;
+a) Get the numbers of the teams of which the player with the name Parmenter and initial R is a member; in this example, we assume that no two players have the same name and initials.
+
+sql:
+SELECT   TEAMNO
+FROM     TEAMS
+WHERE    PLAYERNO =
+        (SELECT   PLAYERNO
+         FROM     PLAYERS
+         WHERE    NAME = 'Parmenter'
+         AND      INITIALS = 'R')
+
+output:
+TEAMNO
+1
+
+
+
+
+
+b)For each penalty, find the payment number, the amount, and the number and name of the player who incurred it.
+
+sql:
+SELECT   PAYMENTNO, AMOUNT, PLAYERS.PLAYERNO, NAME
+FROM     PENALTIES, PLAYERS
+WHERE    PENALTIES.PLAYERNO = PLAYERS.PLAYERNO
+
+output:
+PAYMENTNO	AMOUNT	   PLAYERNO	NAME
+1		100.00	   6		Parmenter
+2		75.00	   44		Baker
+3		100.00	   27		Collins
+4		50.00	   104		Moorman
+5		25.00	   44		Baker
+6		25.00	   8		Newcastle
+7		30.00	   44		Baker
+8		75.00	   27		Collins
+
+
+
+
+
+c)For all players, get the player number and a list of the numbers of teams for which they have ever played.
+
+
+sql:
+SELECT   P.PLAYERNO, M.TEAMNO
+FROM     PLAYERS AS P LEFT OUTER JOIN MATCHES AS M
+         ON P.PLAYERNO = M.PLAYERNO
+
+output:
+PLAYERNO	TEAMNO
+6		1
+6		1
+6		1
+44		1
+83		1
+2		1
+57		1
+8		1
+27		2
+104		2
+112		2
+112		2
+8		2
+7		NULL
+28		NULL
+39		NULL
+95		NULL
+100		NULL
+
+
+
+
+
+d)Get the number of each player who won at least one match.
+
+sql:
+SELECT   PLAYERNO
+FROM     PLAYERS
+WHERE    PLAYERNO NOT IN
+        (SELECT   PLAYERNO
+         FROM     MATCHES WHERE WON >= 1)
+
+output:
+PLAYERNO
+7
+8
+28
+39
+83
+95
+100
+
+
+
+
+
+e)Get the payment numbers of the penalties incurred by players who were born after 1965.
+
+
+sql:
+SELECT   PAYMENTNO
+FROM     PENALTIES
+WHERE    1965 <
+        (SELECT   YEAR(BIRTH_DATE)
+         FROM     PLAYERS
+         WHERE    PLAYERS.PLAYERNO = PENALTIES.PLAYERNO);
+
+output:
+PAYMENTNO
+4
+

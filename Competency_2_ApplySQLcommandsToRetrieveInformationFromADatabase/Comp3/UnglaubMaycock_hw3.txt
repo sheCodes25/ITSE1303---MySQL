@@ -1,0 +1,101 @@
+Execute the following queries and save the results. Also save the command you created to answer the query.
+
+USE TENNIS;
+a) Find the number of penalties and the highest penalty amount.
+
+SELECT   COUNT(*), MAX(AMOUNT)
+FROM     PENALTIES
+
+>>>
+COUNT(*)	MAX(AMOUNT)
+8		100.00
+
+
+
+
+ 
+b) For each player, get the number and the difference between his or her lowest and highest penalty amounts.
+
+SELECT   PLAYERNO,
+        (SELECT   MAX(AMOUNT)- 
+		  MIN(AMOUNT)
+	 FROM     PENALTIES
+         WHERE    PENALTIES.PLAYERNO =
+                  PLAYERS.PLAYERNO)
+FROM     PLAYERS
+
+>>>
+2	NULL
+6	0.00
+7	NULL
+8	0.00
+27	25.00
+28	NULL
+39	NULL
+44	50.00
+57	NULL
+83	NULL
+95	NULL
+100	NULL
+104	0.00
+112	NULL
+
+
+
+
+
+c) For each team that has played in the first division, give the team number, number of matches, and total number of sets won.
+
+SELECT   TEAMNO, COUNT(*), SUM(WON)
+FROM     MATCHES
+WHERE    TEAMNO IN
+        (SELECT   TEAMNO
+         FROM     TEAMS
+         WHERE    DIVISION = 'first')
+GROUP BY TEAMNO
+
+>>>
+TEAMNO  COUNT(*)  SUM(WON)
+1	8	  15
+
+
+
+
+
+d) Get the name and initials of each player who has incurred two or more penalties of more than $40.
+
+SELECT   NAME, INITIALS
+FROM     PLAYERS
+WHERE    PLAYERNO IN
+        (SELECT   PLAYERNO
+         FROM     PENALTIES
+         WHERE    AMOUNT > 40
+         GROUP BY PLAYERNO
+         HAVING   COUNT(*) >= 2)
+
+>>>
+NAME	    INITIALS
+Collins     DD
+
+
+
+
+
+e)Get the match numbers of the matches with the two highest numbers and also the two lowest numbers.
+
+(SELECT   MATCHNO
+ FROM     MATCHES
+ ORDER BY MATCHNO ASC
+ LIMIT    2)
+UNION
+(SELECT   MATCHNO
+ FROM     MATCHES
+ ORDER BY MATCHNO DESC
+ LIMIT    2)
+
+>>>
+MATCHNO
+1
+2
+13
+12
